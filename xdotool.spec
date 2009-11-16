@@ -8,7 +8,9 @@ Group:		X11/Window Managers/Tools
 Source0:	http://semicomplete.googlecode.com/files/%{name}-%{rel}.tar.gz
 # Source0-md5:	78ff810202ed3ae74fd82ec741f889eb
 URL:		http://www.semicomplete.com/projects/xdotool/
+BuildRequires:	perl-tools-pod
 BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libXtst-devel
 BuildRequires:	xorg-proto-xextproto-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
