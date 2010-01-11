@@ -1,12 +1,12 @@
-%define		rel 20090612
+%define		rel 20091231
 Summary:	fake keyboard/mouse input
 Name:		xdotool
 Version:	0
 Release:	0.%{rel}.1
 License:	BSD-like
 Group:		X11/Window Managers/Tools
-Source0:	http://semicomplete.googlecode.com/files/%{name}-%{rel}.tar.gz
-# Source0-md5:	78ff810202ed3ae74fd82ec741f889eb
+Source0:	http://semicomplete.googlecode.com/files/%{name}-%{rel}.02.tar.gz
+# Source0-md5:	faa6f616d33bdd9ec7fbc0d9542a6cc0
 URL:		http://www.semicomplete.com/projects/xdotool/
 BuildRequires:	perl-tools-pod
 BuildRequires:	xorg-lib-libX11-devel
@@ -20,17 +20,20 @@ and mouse activity, move and resize windows, etc. It does this using
 X11's XTEST extension and other Xlib functions.
 
 %prep
-%setup -q -n %{name}-%{rel}
+%setup -q -n %{name}-%{rel}.02
 
 %build
-%{__make}
+%{__make} \
+	CC="%{__cc}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_mandir}}
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir},%{_includedir},%{_mandir}}
 
 %{__make} install \
 	INSTALLBIN=$RPM_BUILD_ROOT%{_bindir} \
+	INSTALLINCLUDE=$RPM_BUILD_ROOT%{_includedir} \
+	INSTALLLIB=$RPM_BUILD_ROOT%{_libdir} \
 	INSTALLMAN=$RPM_BUILD_ROOT%{_mandir}
 
 %clean
@@ -40,4 +43,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc COPYRIGHT CHANGELIST README examples
 %attr(755,root,root) %{_bindir}/xdotool
+%attr(755,root,root) %{_libdir}/libxdo*
 %{_mandir}/man1/xdotool.1*
+%{_includedir}/xdo.h
