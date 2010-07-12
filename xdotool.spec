@@ -1,7 +1,7 @@
 Summary:	fake keyboard/mouse input
 Name:		xdotool
 Version:	2.20100623.2949
-Release:	0.1
+Release:	1
 License:	BSD-like
 Group:		X11/Window Managers/Tools
 Source0:	http://semicomplete.googlecode.com/files/%{name}-%{version}.tar.gz
