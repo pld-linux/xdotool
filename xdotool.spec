@@ -22,6 +22,8 @@ X11's XTEST extension and other Xlib functions.
 %setup -q
 
 %build
+CFLAGS=%{rpmcflags} \
+LDFLAGS=%{rpmldflags} \
 %{__make} \
 	CC="%{__cc}"
 
