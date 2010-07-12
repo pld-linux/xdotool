@@ -1,12 +1,11 @@
-%define		rel 20091231
 Summary:	fake keyboard/mouse input
 Name:		xdotool
-Version:	0
-Release:	0.%{rel}.1
+Version:	2.20100623.2949
+Release:	0.1
 License:	BSD-like
 Group:		X11/Window Managers/Tools
-Source0:	http://semicomplete.googlecode.com/files/%{name}-%{rel}.02.tar.gz
-# Source0-md5:	faa6f616d33bdd9ec7fbc0d9542a6cc0
+Source0:	http://semicomplete.googlecode.com/files/%{name}-%{version}.tar.gz
+# Source0-md5:	f717457e37e912642d422dacc4be7f83
 URL:		http://www.semicomplete.com/projects/xdotool/
 BuildRequires:	perl-tools-pod
 BuildRequires:	xorg-lib-libX11-devel
@@ -20,7 +19,7 @@ and mouse activity, move and resize windows, etc. It does this using
 X11's XTEST extension and other Xlib functions.
 
 %prep
-%setup -q -n %{name}-%{rel}.02
+%setup -q
 
 %build
 %{__make} \
