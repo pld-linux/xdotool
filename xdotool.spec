@@ -1,11 +1,11 @@
 Summary:	fake keyboard/mouse input
 Name:		xdotool
-Version:	2.20110530.1
+Version:	3.20160805.1
 Release:	1
 License:	BSD-like
 Group:		X11/Window Managers/Tools
-Source0:	http://semicomplete.googlecode.com/files/%{name}-%{version}.tar.gz
-# Source0-md5:	62d0c2158bbaf882a1cf580421437b2f
+Source0:	https://github.com/jordansissel/xdotool/releases/download/v%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	544632cc2cf7383bc44425c25ee0650a
 URL:		http://www.semicomplete.com/projects/xdotool/
 BuildRequires:	perl-tools-pod
 BuildRequires:	xorg-lib-libX11-devel
@@ -20,24 +20,23 @@ and mouse activity, move and resize windows, etc. It does this using
 X11's XTEST extension and other Xlib functions.
 
 %package libs
-Summary:	xdotool library
-Summary(pl.UTF-8):	-
+Summary:	libxdo library
 Group:		Libraries
 
 %description libs
-xdotool shared library.
+shared libxdo library.
 
 %package devel
-Summary:	Header files for xdotool library
-Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki xdotool
+Summary:	Header files for libxdo library
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libxdo
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
 
 %description devel
-Header files for xdotool library.
+Header files for libxdo library.
 
 %description devel -l pl.UTF-8
-Pliki nagłówkowe biblioteki xdotool.
+Pliki nagłówkowe biblioteki libxdo.
 
 %prep
 %setup -q
@@ -53,15 +52,16 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir},%{_includedir},%{_mandir}}
 
 %{__make} install \
-	INSTALLBIN=$RPM_BUILD_ROOT%{_bindir} \
-	INSTALLINCLUDE=$RPM_BUILD_ROOT%{_includedir} \
-	INSTALLLIB=$RPM_BUILD_ROOT%{_libdir} \
-	INSTALLMAN=$RPM_BUILD_ROOT%{_mandir}
+	PREFIX=%{_prefix} \
+	INSTALLLIB=%{_libdir} \
+	INSTALLMAN=%{_mandir} \
+	LDCONFIG=/bin/true \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post libs	-p /sbin/ldconfig
+%post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
 
 %files
@@ -72,7 +72,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libxdo.so.2
+%attr(755,root,root) %{_libdir}/libxdo.so.3
 
 %files devel
 %defattr(644,root,root,755)
