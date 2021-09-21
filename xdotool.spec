@@ -1,16 +1,19 @@
 Summary:	fake keyboard/mouse input
 Name:		xdotool
-Version:	3.20160805.1
+Version:	3.20210903.1
 Release:	1
 License:	BSD-like
 Group:		X11/Window Managers/Tools
 Source0:	https://github.com/jordansissel/xdotool/releases/download/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	544632cc2cf7383bc44425c25ee0650a
+# Source0-md5:	6ac239a33b4294d9553440fd2b9a1332
 URL:		http://www.semicomplete.com/projects/xdotool/
 BuildRequires:	perl-tools-pod
+BuildRequires:	sed >= 4.0
 BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libXi-devel
+BuildRequires:	xorg-lib-libXinerama-devel
 BuildRequires:	xorg-lib-libXtst-devel
-BuildRequires:	xorg-proto-xextproto-devel
+BuildRequires:	xorg-lib-libxkbcommon-devel
 Requires:	%{name}-libs = %{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -41,6 +44,10 @@ Pliki nagłówkowe biblioteki libxdo.
 %prep
 %setup -q
 
+sed -i -e 's#^libdir=.*#libdir=%{_libdir}#' \
+	-e 's#^includedir=.*#includedir=%{_includedir}#' \
+	libxdo.pc
+
 %build
 CFLAGS="%{rpmcflags}" \
 LDFLAGS="%{rpmldflags}" \
@@ -66,7 +73,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc COPYRIGHT CHANGELIST README examples
+%doc COPYRIGHT CHANGELIST README.md examples
 %attr(755,root,root) %{_bindir}/xdotool
 %{_mandir}/man1/xdotool.1*
 
@@ -78,3 +85,4 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libxdo.so
 %{_includedir}/xdo.h
+%{_pkgconfigdir}/libxdo.pc
