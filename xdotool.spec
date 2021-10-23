@@ -1,11 +1,11 @@
 Summary:	fake keyboard/mouse input
 Name:		xdotool
-Version:	3.20210903.1
+Version:	3.20211022.1
 Release:	1
 License:	BSD-like
 Group:		X11/Window Managers/Tools
 Source0:	https://github.com/jordansissel/xdotool/releases/download/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	6ac239a33b4294d9553440fd2b9a1332
+# Source0-md5:	9fd993a251a7c38b32381503544b0dd7
 URL:		http://www.semicomplete.com/projects/xdotool/
 BuildRequires:	perl-tools-pod
 BuildRequires:	sed >= 4.0
