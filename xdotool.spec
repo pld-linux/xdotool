@@ -1,4 +1,5 @@
-Summary:	fake keyboard/mouse input
+Summary:	Fake keyboard/mouse input
+Summary(pl.UTF-8):	Sztuczne źródło klawiatury/myszy
 Name:		xdotool
 Version:	3.20211022.1
 Release:	1
@@ -22,12 +23,22 @@ xdotool lets you programatically (or manually) simulate keyboard input
 and mouse activity, move and resize windows, etc. It does this using
 X11's XTEST extension and other Xlib functions.
 
+%description -l pl.UTF-8
+xdotool pozwala programowo (lub ręcznie) symulować aktywność wejściową
+klawiatury i myszy, przesuwać okienka, zmieniać ich rozmiary itp.
+Dzieje się to przy użyciu rozszerzenia X11 XTEST orz innych funkcji
+biblioteki Xlib.
+
 %package libs
-Summary:	libxdo library
+Summary:	Shared libxdo library
+Summary(pl.UTF-8):	Biblioteka współdzielona libxdo
 Group:		Libraries
 
 %description libs
-shared libxdo library.
+Shared libxdo library.
+
+%description libs -l pl.UTF-8
+Biblioteka współdzielona libxdo.
 
 %package devel
 Summary:	Header files for libxdo library
@@ -44,7 +55,7 @@ Pliki nagłówkowe biblioteki libxdo.
 %prep
 %setup -q
 
-sed -i -e 's#^libdir=.*#libdir=%{_libdir}#' \
+%{__sed} -i -e 's#^libdir=.*#libdir=%{_libdir}#' \
 	-e 's#^includedir=.*#includedir=%{_includedir}#' \
 	libxdo.pc
 
