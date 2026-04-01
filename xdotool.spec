@@ -1,17 +1,17 @@
 Summary:	Fake keyboard/mouse input
 Summary(pl.UTF-8):	Sztuczne źródło klawiatury/myszy
 Name:		xdotool
-Version:	3.20211022.1
+Version:	4.20260303.1
 Release:	1
 License:	BSD-like
 Group:		X11/Window Managers/Tools
-Source0:	https://github.com/jordansissel/xdotool/releases/download/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	9fd993a251a7c38b32381503544b0dd7
-URL:		http://www.semicomplete.com/projects/xdotool/
+#Source0Download: https://github.com/jordansissel/xdotool/releases
+Source0:	https://github.com/jordansissel/xdotool/archive/v%{version}/%{name}-%{version}.tar.gz
+# Source0-md5:	fc6864ebb381f8b50c37e2d46dbd37b1
+URL:		https://www.semicomplete.com/projects/xdotool/
 BuildRequires:	perl-tools-pod
-BuildRequires:	sed >= 4.0
+BuildRequires:	pkgconfig
 BuildRequires:	xorg-lib-libX11-devel
-BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXinerama-devel
 BuildRequires:	xorg-lib-libXtst-devel
 BuildRequires:	xorg-lib-libxkbcommon-devel
@@ -45,6 +45,7 @@ Summary:	Header files for libxdo library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libxdo
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{version}-%{release}
+Requires:	xorg-lib-libX11-devel
 
 %description devel
 Header files for libxdo library.
@@ -54,10 +55,6 @@ Pliki nagłówkowe biblioteki libxdo.
 
 %prep
 %setup -q
-
-%{__sed} -i -e 's#^libdir=.*#libdir=%{_libdir}#' \
-	-e 's#^includedir=.*#includedir=%{_includedir}#' \
-	libxdo.pc
 
 %build
 CFLAGS="%{rpmcflags}" \
@@ -84,16 +81,16 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc COPYRIGHT CHANGELIST README.md examples
+%doc CHANGELIST COPYRIGHT FAQ.md README.md TODO examples
 %attr(755,root,root) %{_bindir}/xdotool
 %{_mandir}/man1/xdotool.1*
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libxdo.so.3
+%{_libdir}/libxdo.so.4
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libxdo.so
+%{_libdir}/libxdo.so
 %{_includedir}/xdo.h
 %{_pkgconfigdir}/libxdo.pc
